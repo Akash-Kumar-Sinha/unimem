@@ -1,0 +1,26 @@
+# Run postgres
+
+docker run -d \
+  --name pgvector \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=unimem \
+  -p 5432:5432 \
+  -v pgvector_data:/var/lib/postgresql/data \
+  pgvector/pgvector:pg16
+
+---
+
+# Upload document
+
+curl -X PUT http://127.0.0.1:8000/api/v1/upload   -H "accept: application/json"   -F "file=@image.png"
+
+# Provide Prompt
+
+curl -X POST http://127.0.0.1:8000/api/v1/prompt \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "session_id": "6c650397-2bcf-465b-925b-f3ebdd09fb2a",
+    "prompt": "Who is Leopa?"
+  }'

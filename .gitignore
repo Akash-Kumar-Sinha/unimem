@@ -1,0 +1,9 @@
+__pycache__
+TODO
+*.pdf
+*.log
+.env
+/notes
+/frontend/node_modules
+logs
+uploads
